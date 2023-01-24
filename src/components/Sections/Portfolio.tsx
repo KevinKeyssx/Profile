@@ -1,6 +1,7 @@
 import {ExternalLinkIcon} from '@heroicons/react/outline';
 import classNames from 'classnames';
 import Image from 'next/image';
+import Link from 'next/link';
 import {FC, memo, MouseEvent, useCallback, useEffect, useRef, useState} from 'react';
 
 import {isMobile} from '../../config';
@@ -62,7 +63,7 @@ const ItemOverlay: FC<{item: PortfolioItem}> = memo(({item: {url, title, descrip
   );
 
   return (
-    <a
+    <Link
       className={classNames(
         'absolute inset-0 h-full w-full  bg-gray-900 transition-all duration-300',
         {'opacity-0 hover:opacity-80': !mobile},
@@ -79,6 +80,6 @@ const ItemOverlay: FC<{item: PortfolioItem}> = memo(({item: {url, title, descrip
         </div>
         <ExternalLinkIcon className="absolute bottom-1 right-1 h-4 w-4 shrink-0 text-white sm:bottom-2 sm:right-2" />
       </div>
-    </a>
+    </Link>
   );
 });

@@ -1,6 +1,7 @@
 import {ChevronDownIcon} from '@heroicons/react/outline';
 import classNames from 'classnames';
 import Image from 'next/image';
+import Link from 'next/link';
 import {FC, memo} from 'react';
 
 import {heroData, SectionId} from '../../data/data';
@@ -31,7 +32,7 @@ const Hero: FC = memo(() => {
             </div>
             <div className="flex w-full justify-center gap-x-4">
               {actions.map(({href, text, primary, Icon}) => (
-                <a
+                <Link
                   className={classNames(
                     'flex gap-x-2 rounded-full border-2 bg-none py-2 px-4 text-sm font-medium text-white ring-offset-gray-700/80 hover:bg-gray-700/80 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-base',
                     primary ? 'border-orange-500 ring-orange-500' : 'border-white ring-white',
@@ -40,17 +41,17 @@ const Hero: FC = memo(() => {
                   key={text}>
                   {text}
                   {Icon && <Icon className="h-5 w-5 text-white sm:h-6 sm:w-6" />}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
         </div>
         <div className="absolute inset-x-0 bottom-6 flex justify-center">
-          <a
+          <Link
             className="rounded-full bg-white p-1 ring-white ring-offset-2 ring-offset-gray-700/80 focus:outline-none focus:ring-2 sm:p-2"
             href={`/#${SectionId.About}`}>
             <ChevronDownIcon className="h-5 w-5 bg-transparent sm:h-6 sm:w-6" />
-          </a>
+          </Link>
         </div>
       </div>
     </Section>

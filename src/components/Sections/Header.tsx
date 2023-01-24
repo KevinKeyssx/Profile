@@ -118,19 +118,23 @@ const MobileNav: FC<{navSections: SectionId[]; currentSection: SectionId | null}
 );
 
 const NavItem: FC<{
-  section: string;
-  current: boolean;
-  activeClass: string;
-  inactiveClass: string;
-  onClick?: () => void;
+	section: string;
+	current: boolean;
+	activeClass: string;
+	inactiveClass: string;
+	onClick?: () => void;
 }> = memo(({section, current, inactiveClass, activeClass, onClick}) => {
-  return (
-    <Link href={`/#${section}`} passHref>
-      <a className={classNames(current ? activeClass : inactiveClass)} key={section} onClick={onClick}>
-        {section}
-      </a>
-    </Link>
-  );
+	return (
+		<div
+			className	= { classNames(current ? activeClass : inactiveClass) }
+			key			= { section }
+			onClick		= { onClick }
+		>
+			<Link href={`/#${section}`} passHref >
+				{section}
+			</Link>
+		</div>
+	);
 });
 
 Header.displayName = 'Header';
