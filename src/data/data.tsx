@@ -1,11 +1,11 @@
 import {
-  AcademicCapIcon,
-  CalendarIcon,
-  DownloadIcon,
-  FlagIcon,
-  MapIcon,
-  OfficeBuildingIcon,
-  SparklesIcon,
+	AcademicCapIcon,
+	CalendarIcon,
+	DownloadIcon,
+	FlagIcon,
+	MapIcon,
+	OfficeBuildingIcon,
+	SparklesIcon,
 } from '@heroicons/react/outline';
 
 import GithubIcon         from '../components/Icon/GithubIcon';
@@ -28,38 +28,38 @@ import porfolioImage11    from '../images/portfolio/portfolio-11.jpg';
 import profilepic         from '../images/profilepic.jpg';
 import testimonialImage   from '../images/testimonial.webp';
 import {
-  About,
-  ContactSection,
-  ContactType,
-  Hero,
-  HomepageMeta,
-  PortfolioItem,
-  SkillGroup,
-  Social,
-  TestimonialSection,
-  TimelineItem,
+	About,
+	ContactSection,
+	ContactType,
+	Hero,
+	HomepageMeta,
+	PortfolioItem,
+	SkillGroup,
+	Social,
+	TestimonialSection,
+	TimelineItem,
 } from './dataDef';
 
 /**
  * Page meta data
  */
 export const homePageMeta: HomepageMeta = {
-  title       : 'React Resume Template',
-  description : "Example site built with Tim Baker's react resume template",
+	title       : 'React Resume Template',
+	description : "Example site built with Tim Baker's react resume template",
 };
 
 /**
  * Section definition
  */
 export const SectionId = {
-  Hero          : 'hero',
-  About         : 'about',
-  Contact       : 'contact',
-  Portfolio     : 'portfolio',
-  Resume        : 'resume',
-  Skills        : 'skills',
-  Stats         : 'stats',
-  Testimonials  : 'testimonials',
+	Hero          : 'hero',
+	About         : 'acerca de mi',
+	Contact       : 'contacto',
+	Portfolio     : 'portfolio',
+	Resume        : 'resumen',
+	Skills        : 'habilidades',
+	Stats         : 'estadísticas',
+	Testimonials  : 'testimonios',
 } as const;
 
 export type SectionId = typeof SectionId[keyof typeof SectionId];
@@ -68,56 +68,56 @@ export type SectionId = typeof SectionId[keyof typeof SectionId];
  * Hero section
  */
 export const heroData: Hero = {
-  imageSrc      : heroImage,
-  name          : `Kevin Candia Núñez`,
-  description   : (
-    <>
-      <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
-      Soy un ingeniero joven, cada día
-sigo mejorando y progresando,
-nunca paro de aprender
-        I'm a Victoria based <strong className="text-stone-100">Full Stack Software Engineer</strong>, currently working
-        at <strong className="text-stone-100">Instant Domains</strong> helping build a modern, mobile-first, domain
-        registrar and site builder.
-      </p>
-      <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
-        In my free time time, you can catch me training in <strong className="text-stone-100">Muay Thai</strong>,
-        plucking my <strong className="text-stone-100">banjo</strong>, or exploring beautiful{' '}
-        <strong className="text-stone-100">Vancouver Island</strong>.
-      </p>
-    </>
-  ),
-  actions: [
-    {
-      href      : '/assets/resume.pdf',
-      text      : 'Resume',
-      primary   : true,
-      Icon      : DownloadIcon,
-    },
-    {
-      href      : `#${SectionId.Contact}`,
-      text      : 'Contact',
-      primary   : false,
-    },
-  ],
+	imageSrc      : heroImage,
+	name          : `Kevin Candia Núñez`,
+	description   : (
+		<>
+		<p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
+		Soy un ingeniero joven, cada día
+		sigo mejorando y progresando,
+		nunca paro de aprender
+			I'm a Victoria based <strong className="text-stone-100">Full Stack Software Engineer</strong>, currently working
+			at <strong className="text-stone-100">Instant Domains</strong> helping build a modern, mobile-first, domain
+			registrar and site builder.
+		</p>
+		<p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
+			In my free time time, you can catch me training in <strong className="text-stone-100">Muay Thai</strong>,
+			plucking my <strong className="text-stone-100">banjo</strong>, or exploring beautiful{' '}
+			<strong className="text-stone-100">Vancouver Island</strong>.
+		</p>
+		</>
+	),
+	actions: [
+		{
+			href      : '/assets/resume.pdf',
+			text      : 'Resume',
+			primary   : true,
+			Icon      : DownloadIcon,
+		},
+		{
+			href      : `#${SectionId.Contact}`,
+			text      : 'Contact',
+			primary   : false,
+		},
+	],
 };
 
 /**
  * About section
  */
 export const aboutData: About = {
-  profileImageSrc : profilepic,
-  description     : `Use this bio section as your way of describing yourself and saying what you do, what technologies you like
-  to use or feel most comfortable with, describing your personality, or whatever else you feel like throwing
-  in.`,
-  aboutItems: [
-    {label: 'Localidad',    text: 'Santiago, Chile',              Icon: MapIcon},
-    {label: 'Edad',         text: '27',                           Icon: CalendarIcon},
-    {label: 'Nacionalidad', text: 'Chileno',                      Icon: FlagIcon},
-    {label: 'Intereses',    text: 'Robótica, Música, Tecnología', Icon: SparklesIcon},
-    {label: 'Estudios',     text: 'Universidad Andrés Bello',     Icon: AcademicCapIcon},
-    {label: 'Empleo',       text: 'Ingeniero informático, senior, AUI', Icon: OfficeBuildingIcon},
-  ],
+	profileImageSrc : profilepic,
+	description     : `Use this bio section as your way of describing yourself and saying what you do, what technologies you like
+	to use or feel most comfortable with, describing your personality, or whatever else you feel like throwing
+	in.`,
+	aboutItems: [
+		{label: 'Localidad',    text: 'Santiago, Chile',              Icon: MapIcon},
+		{label: 'Edad',         text: '27',                           Icon: CalendarIcon},
+		{label: 'Nacionalidad', text: 'Chileno',                      Icon: FlagIcon},
+		{label: 'Intereses',    text: 'Robótica, Música, Tecnología', Icon: SparklesIcon},
+		{label: 'Estudios',     text: 'Universidad Andrés Bello',     Icon: AcademicCapIcon},
+		{label: 'Empleo',       text: 'Ingeniero informático, senior, AUI', Icon: OfficeBuildingIcon},
+	],
 };
 
 /**
@@ -251,59 +251,59 @@ export const otherSkills: SkillGroup[] = [
 	{
 		name: 'Otras Herramientas',
 		skills: [
-		{
-			name: 'Atassian',
-			level: 10,
-		},
-		{
-			name: 'Bitbucket',
-			level: 9,
-		},
-		{
-			name: 'Sourcetree',
-			level: 9,
-		},
-		{
-			name: 'Confluence',
-			level: 10,
-		},
-		{
-			name: 'Jira',
-			level: 10,
-		},
-		{
-			name: 'Fortify',
-			level: 8,
-		},
-		{
-			name: 'Fortify',
-			level: 8,
-		},
+			{
+				name: 'Atassian',
+				level: 10,
+			},
+			{
+				name: 'Bitbucket',
+				level: 9,
+			},
+			{
+				name: 'Sourcetree',
+				level: 9,
+			},
+			{
+				name: 'Confluence',
+				level: 10,
+			},
+			{
+				name: 'Jira',
+				level: 10,
+			},
+			{
+				name: 'Fortify',
+				level: 8,
+			},
+			{
+				name: 'Fortify',
+				level: 8,
+			},
 		],
 	},
 	{
 		name: 'Bases de Datos',
 		skills: [
-		{
-			name: 'PostgreSQL',
-			level: 9,
-		},
-		{
-			name: 'SQL Serve',
-			level: 9,
-		},
-		{
-			name: 'Oracle',
-			level: 7,
-		},
-		{
-			name: 'My SQL',
-			level: 7,
-		},
-		{
-			name: 'MongoDB',
-			level: 7,
-		},
+			{
+				name: 'PostgreSQL',
+				level: 9,
+			},
+			{
+				name: 'SQL Serve',
+				level: 9,
+			},
+			{
+				name: 'Oracle',
+				level: 7,
+			},
+			{
+				name: 'My SQL',
+				level: 7,
+			},
+			{
+				name: 'MongoDB',
+				level: 7,
+			},
 		],
 	},
 	{
