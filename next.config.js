@@ -24,11 +24,12 @@ const nextConfig = {
     multipass: true,
     plugins: ['removeDimensions'],
   },
-  strictMode: true,
+  strictMode: false,
   swcMinify: true,
   trailingSlash: false,
   images: {
-    domains: ['images.unsplash.com', 'source.unsplash.com'],
+    domains: ['images.unsplash.com', 'source.unsplash.com', 'photos.google.com','pbs.twimg.com', 'lh3.googleusercontent.com'],
+    // domains: ['images.unsplash.com', 'source.unsplash.com'],
   },
 };
 
