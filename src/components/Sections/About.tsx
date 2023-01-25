@@ -10,7 +10,7 @@ import Section 					from '../Layout/Section';
 
 const About: FC = memo(() => {
 
-	const [info, setInfo] = useState( [] as ILov[] )
+	const [info, setInfo] = useState( [{description:'Hola'}] as ILov[] )
 
 	useEffect(() => {
 		getData();
