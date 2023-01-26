@@ -19,7 +19,7 @@ export interface ILovval extends IModel, IBaseModel {
 export interface ILov extends IModel, IBaseModel {
     [key: string]   : unknown;
     lov_vals        : ILovval[];
-    loaded?         : boolean;
+    detail?         : string;
 }
 
 
