@@ -7,7 +7,7 @@ export interface IModel {
 
 export interface IBaseModel {
     active          : boolean;
-    skill           : unknown;
+    skill           : ISkill;
 }
 
 export interface ILovval extends IModel, IBaseModel {
@@ -19,4 +19,16 @@ export interface ILovval extends IModel, IBaseModel {
 export interface ILov extends IModel, IBaseModel {
     [key: string]   : unknown;
     lov_vals        : ILovval[];
+    loaded?         : boolean;
+}
+
+
+export interface ISkill {
+    items           : string;
+    filter          : string;
+    date            : string;
+    location        : string;
+    type            : string;
+    img             : string;
+    url             : string;
 }

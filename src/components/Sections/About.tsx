@@ -1,30 +1,17 @@
 import classNames 				from 'classnames';
 import Image 					from 'next/image';
-import {FC, memo, useEffect, useState} 	from 'react';
+import {FC, memo} 				from 'react';
 
-import {aboutData, SectionId} 	from '../../data/data';
-import {ILov} from '../../data/lov.interface';
-import {useFetch} 				from '../../hooks/useFetch';
-import {Constants} 				from '../../utils/constants';
-import Section 					from '../Layout/Section';
+import {SectionId} 	from '../../data/data';
+import {aboutData} 	from '../../data/handleData';
+import {ILov} 		from '../../data/lov.interface';
+import Section 		from '../Layout/Section';
 
-const About: FC = memo(() => {
+const About: FC = memo((dataChildren) => {
 
-	const [info, setInfo] = useState( [{description:'Hola'}] as ILov[] )
+	const {children} = dataChildren;
+	const {profileImageSrc, description, aboutItems} = aboutData( children as ILov[] );
 
-	useEffect(() => {
-		getData();
-	}, []);
-
-	const getData = async() => {
-		const url	= `${Constants.URL_LOCALHOST_ADVERTISEMENT}${Constants.END_POINT_SEARCH_ALL}`;
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        const data 	= await useFetch<ILov[]>( url, 'GET' );
-		setInfo( data );
-		
-	}
-
-	const {profileImageSrc, description, aboutItems} = aboutData;
 	return (
 		<Section className="bg-gradient-to-r from-cyan-700 via-sye-800 to-sky-600" sectionId={SectionId.About}>
 			<div className={classNames('grid grid-cols-1 gap-y-4', {'md:grid-cols-4': !!profileImageSrc})}>
@@ -43,7 +30,7 @@ const About: FC = memo(() => {
 
 				<div className={classNames('col-span-1 flex flex-col gap-y-6', {'md:col-span-3': !!profileImageSrc})}>
 					<div className="flex flex-col gap-y-2">
-						<h2 className="text-2xl font-bold text-white">Acerca de mi { info[0].description }</h2>
+						<h2 className="text-2xl font-bold text-white">Acerca de mi</h2>
 						<p className="prose prose-sm text-gray-300 sm:prose-base">{description}</p>
 					</div>
 
