@@ -2,7 +2,7 @@ import dynamic    from 'next/dynamic';
 import {FC, memo, useEffect, useState} from 'react';
 
 import Page           from '../components/Layout/Page';
-import {Loading}		from '../components/Loading';
+// import {Loading}		from '../components/Loading';
 import About          from '../components/Sections/About';
 import Footer         from '../components/Sections/Footer';
 import Hero           from '../components/Sections/Hero';
