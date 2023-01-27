@@ -21,10 +21,10 @@ const Footer: FC = memo((dataChildren) => {
 			</div>
 
 			<div className="flex flex-col items-center gap-y-6">
-				<div className="flex gap-x-4 text-neutral-500">
+				<div className="flex gap-x-4 text-neutral-200">
 					<Socials children = {children as ILov[] }/>
 				</div>
-				<span className="text-sm text-neutral-700">© Copyright {new Date().getFullYear()} KevinKeyssx</span>
+				<span className="text-sm text-neutral-100">© Copyright {new Date().getFullYear()} KevinKeyssx</span>
 			</div>
 		</div>
 	)
