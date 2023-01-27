@@ -32,7 +32,7 @@ const Hero: FC = memo((dataChildren) => {
 
 				<div className="z-10  max-w-screen-lg px-4 lg:px-0">
 					<div className="flex flex-col items-center gap-y-6 rounded-xl bg-gray-800/40 p-10 pb-px text-center shadow-lg backdrop-blur-sm">
-						<h1 className="text-4xl font-bold text-white sm:text-5xl lg:text-7xl">{name}</h1>
+						<h1 className="text-4xl font-bold text-white sm:text-4xl lg:text-6xl">{name}</h1>
 						{description}
 
 						<div className={classNames('grid grid-cols-1 gap-y-4', {'md:grid-cols-4': !!profileImageSrc})}>

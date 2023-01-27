@@ -37,9 +37,11 @@ const Home: FC = memo(() => {
 	}, []);
 
 	const getData = async() => {
-		const url	= `${process.env.NEXT_PUBLIC_API_URL}lov/${Constants.END_POINT_SEARCH_ALL}`;
+		const url		= `${process.env.NEXT_PUBLIC_API_URL}lov/${Constants.END_POINT_SEARCH_ALL}`;
+		const headers	= new Headers();
+        headers.append('X-T', process.env.NEXT_PUBLIC_TOKEN); 
 		// eslint-disable-next-line react-hooks/rules-of-hooks
-		const lov 	= await useFetch<ILov[] | { detail: string }>( url, 'GET' );
+		const lov 	= await useFetch<ILov[] | { detail: string }>( url, 'GET', undefined, headers );
 		const fail 	= lov as { detail: string };
 
 		if (  fail.detail )	return;
