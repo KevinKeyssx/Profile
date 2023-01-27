@@ -63,7 +63,7 @@ const Resume: FC = memo((dataChildren) => {
 										width		= '17'
 									/>
 									{certificate}
-									</div>
+								</div>
 							</span>))}
 						</div>
 					</div>

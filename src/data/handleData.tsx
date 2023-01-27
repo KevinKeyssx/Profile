@@ -1,11 +1,11 @@
 import {
 	AcademicCapIcon,
 	CalendarIcon,
+    DeviceMobileIcon,
 	DownloadIcon,
 	FlagIcon,
 	MapIcon,
 	OfficeBuildingIcon,
-	SparklesIcon,
 } from '@heroicons/react/outline';
 
 import GithubIcon           from '../components/Icon/GithubIcon';
@@ -64,17 +64,18 @@ export const aboutData = ( data: ILov[] ): About => {
 
     const icons = [
         AcademicCapIcon,
-        CalendarIcon,
-        SparklesIcon,
+        DeviceMobileIcon,
         OfficeBuildingIcon,
         FlagIcon,
         MapIcon,
+        CalendarIcon,
     ]
 
-    const aboutItems = handleItems(data, 'About', 'true', icons)  as AboutItem[]
+    const aboutItems = handleItems(data, 'About', 'true', icons) as AboutItem[];
 
 	return { 
-        profileImageSrc : filterLovVals(data, 'About', 'ImgAbout'),
+        // profileImageSrc : filterLovVals(data, 'About', 'ImgAbout'),
+        profileImageSrc : '/me.jpg',
         description     : filterLovVals(data, 'About', 'AboutMe'),
         aboutItems
     }
@@ -86,13 +87,16 @@ export const aboutData = ( data: ILov[] ): About => {
  */
 export const getFormation = ( data: ILov[], type: string ): TimelineItem[] => {
 
-    const formations = filterLovValsS(data, type);
-
-    return formations.map( formation => ({
+    return filterLovValsS(data, type)
+    .sort((a: ILovval, b: ILovval) => 
+        a.skill.sort - b.skill.sort
+    )
+    .map( formation => ({
         date        : formation.skill.date,
         location    : formation.skill.location,
         title       : formation.description,
-        content     : <p>{formation.comment}</p>
+        content     : <p>{formation.comment}</p>,
+        tools       : formation.skill.tools
     } as TimelineItem));
 
 }
@@ -164,10 +168,20 @@ const handleItems = ( data : ILov[], name : string, description : string, icons:
     ?.find( lov => lov.description === name)
     ?.lov_vals
     .filter( val => val.skill.filter === description )
+    .sort((a: ILovval, b: ILovval) => 
+        a.skill.sort - b.skill.sort
+    )
 
     return items?.map( (item, index) => ({
         label   : item.description,
-        text    : item.comment,
+        text    : item.skill.date === 'true' ? getAge( item.comment ) : item.comment,
         Icon    : icons[index]
     })) ?? [];
+}
+
+const getAge = ( birth: string ): string => {
+    const birthday  = new Date( birth.split( '/' ).reverse().join( '-' ) );
+    const ageDifMs  = Date.now() - birthday.getTime();
+    const ageDate   = new Date( ageDifMs );
+    return Math.abs( ageDate.getUTCFullYear() - 1970 ).toString();
 }

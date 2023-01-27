@@ -31,4 +31,6 @@ export interface ISkill {
     type            : string;
     img             : string;
     url             : string;
+    sort            : number;
+    tools           : string[];
 }

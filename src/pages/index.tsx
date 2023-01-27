@@ -3,10 +3,10 @@ import {FC, memo, useEffect, useState} from 'react';
 
 import Page     		from '../components/Layout/Page';
 import {Loading}		from '../components/Loading';
-import About          	from '../components/Sections/About';
+// import About          	from '../components/Sections/About';
 import Footer         	from '../components/Sections/Footer';
 import Hero           	from '../components/Sections/Hero';
-import Portfolio      	from '../components/Sections/Portfolio';
+// import Portfolio      	from '../components/Sections/Portfolio';
 import Resume         	from '../components/Sections/Resume';
 import {homePageMeta} 	from '../data/data';
 import {ILov} 			from '../data/lov.interface';
@@ -60,10 +60,10 @@ const Home: FC = memo(() => {
 		<Page description={description} title={title}>
 			<Header />
 			<Hero 		children = { data }/>
-			<About 		children = { data }/>
+			{/* <About 		children = { data }/> */}
 			<Resume 	children = { data }/>
-			<Portfolio 	children = { data }/>
-			<Footer />
+			{/* <Portfolio 	children = { data }/> */}
+			<Footer children = { data } />
 		</Page>
 	);
 });

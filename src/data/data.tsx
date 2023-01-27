@@ -42,17 +42,17 @@ import {
  * Page meta data
  */
 export const homePageMeta: HomepageMeta = {
-	title       : 'React Resume Template',
-	description : "Example site built with Tim Baker's react resume template",
+	title       : 'KevinKeyssx',
+	description : "My personal profile",
 };
 
 /**
  * Section definition
  */
 export const SectionId = {
-	Hero          : 'hero',
+	Hero          : 'kevin',
 	About         : 'kevin',
-	Portfolio     : 'portfolio',
+	// Portfolio     : 'portfolio',
 	Resume        : 'resumen',
 	Skills        : 'habilidades',
 	Stats         : 'estadísticas',

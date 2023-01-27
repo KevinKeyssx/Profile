@@ -18,12 +18,12 @@ const About: FC = memo((dataChildren) => {
 				{!!profileImageSrc && (
 				<div className="col-span-1 flex justify-center md:justify-start">
 					<div className="relative h-34 w-34 overflow-hidden rounded-xl md:h-60 md:w-52">
-					<Image
-						alt     = "about-me-image"
-						height  = '200'
-						src     = {profileImageSrc}
-						width   = '150'
-					/>
+						<Image
+							alt     = "about-me-image"
+							height  = '200'
+							src     = {profileImageSrc}
+							width   = '150'
+						/>
 					</div>
 				</div>
 				)}
