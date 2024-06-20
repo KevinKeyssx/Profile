@@ -8,7 +8,6 @@ import Footer         	from '../components/Sections/Footer';
 import Hero           	from '../components/Sections/Hero';
 import Portfolio      	from '../components/Sections/Portfolio';
 import Resume         	from '../components/Sections/Resume';
-import {homePageMeta} 	from '../data/data';
 import {ILov} 			from '../data/lov.interface';
 import {useFetch} 		from '../hooks/useFetch';
 import {Constants} 		from '../utils/constants';
@@ -18,6 +17,11 @@ const Header = dynamic(() => import('../components/Sections/Header'), {ssr: fals
 
 
 const Home: FC = memo(() => {
+	const homePageMeta = {
+		title       : 'KevinKeyssx',
+		description : "My personal profile",
+	};
+
 	const {title, description}  = homePageMeta;
 
 	const [ loaded, setLoaded ] = useState( false );
@@ -62,6 +66,7 @@ const Home: FC = memo(() => {
 	}
 
 	return (
+		// eslint-disable-next-line react-memo/require-usememo
 		<Page description={description} title={title}>
 			<Header />
 			<Hero 		children = { data }/>

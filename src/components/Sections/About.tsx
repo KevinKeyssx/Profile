@@ -2,7 +2,6 @@ import classNames 				from 'classnames';
 import Image 					from 'next/image';
 import {FC, memo} 				from 'react';
 
-import {SectionId} 	from '../../data/data';
 import {aboutData} 	from '../../data/handleData';
 import {ILov} 		from '../../data/lov.interface';
 import Section 		from '../Layout/Section';
@@ -13,7 +12,7 @@ const About: FC = memo((dataChildren) => {
 	const {profileImageSrc, description, aboutItems} = aboutData( children as ILov[] );
 
 	return (
-		<Section className="bg-gradient-to-r from-cyan-700 via-sye-800 to-sky-600" sectionId={SectionId.About}>
+		<Section className="bg-gradient-to-r from-cyan-700 via-sye-800 to-sky-600">
 			<div className={classNames('grid grid-cols-1 gap-y-4', {'md:grid-cols-4': !!profileImageSrc})}>
 				{!!profileImageSrc && (
 				<div className="col-span-1 flex justify-center md:justify-start">
