@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import {useEffect, useRef} from 'react';
 
 function useInterval(callback: () => void, delay: number | null) {
