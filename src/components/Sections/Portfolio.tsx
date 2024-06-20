@@ -5,6 +5,7 @@ import Link 				from 'next/link';
 import {FC, memo, MouseEvent, useCallback, useEffect, useRef, useState} from 'react';
 
 import {isMobile}               from '../../config';
+import {SectionId}  			from '../../data/data';
 import {PortfolioItem}          from '../../data/dataDef';
 import {portfolioItems} 		from '../../data/handleData';
 import {ILov} 					from '../../data/lov.interface';
@@ -16,7 +17,7 @@ const Portfolio: FC = memo(( dataChildren ) => {
 	const {children} = dataChildren;
 
 	return (
-		<Section className="bg-neutral-800">
+		<Section className="bg-neutral-800" sectionId={SectionId.Portfolio}>
 			<div className="flex flex-col gap-y-8">
 
 				<h2 className="self-center text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 text-transparent bg-clip-text">

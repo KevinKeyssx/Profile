@@ -4,7 +4,7 @@ import Image              	from 'next/image';
 import Link               	from 'next/link';
 import {FC, memo}         	from 'react';
 
-import {SectionId}    			from '../../data/data';
+import {SectionId} 				from '../../data/data';
 import {aboutData, heroData}    from '../../data/handleData';
 import {ILov}         			from '../../data/lov.interface';
 import Section        			from '../Layout/Section';
@@ -17,7 +17,7 @@ const Hero: FC = memo((dataChildren) => {
 	const {profileImageSrc, aboutItems} = aboutData( children as ILov[] );
 
 	return (
-		<Section noPadding>
+		<Section noPadding sectionId={SectionId.Hero}>
 			<div className="relative flex h-screen w-screen items-center justify-center">
 				<Image
 					alt         = { `${name}-image` }

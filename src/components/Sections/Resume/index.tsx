@@ -1,5 +1,6 @@
 import {FC, memo} from 'react';
 
+import {SectionId} 									from '../../../data/data';
 import {getCertificates,getFormation, getSkills} 	from '../../../data/handleData';
 import {ILov} 			from '../../../data/lov.interface';
 import Section        	from '../../Layout/Section';
@@ -12,7 +13,7 @@ const Resume: FC = memo((dataChildren) => {
 	const {children} = dataChildren;
 
 	return (
-		<Section className="bg-neutral-100">
+		<Section className="bg-neutral-100" sectionId={SectionId.Resume}>
 			<div className="flex flex-col divide-y-2 divide-neutral-300">
 				{/* Eduación */}
 				<ResumeSection title="Educación">

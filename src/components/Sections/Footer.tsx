@@ -2,7 +2,6 @@ import {ChevronUpIcon}  from '@heroicons/react/outline';
 import Link             from 'next/link';
 import {FC, memo}       from 'react';
 
-import {SectionId}      from '../../data/data';
 import {ILov} 			from '../../data/lov.interface';
 import Socials          from '../Socials';
 
@@ -15,7 +14,7 @@ const Footer: FC = memo((dataChildren) => {
 			<div className="absolute inset-x-0 -top-4 flex justify-center sm:-top-6">
 				<Link
 					className="rounded-full bg-neutral-100 p-1 ring-white ring-offset-2 ring-offset-gray-700/80 focus:outline-none focus:ring-2 sm:p-2"
-					href={`/#${SectionId.Hero}`}>
+					href="/#kevin">
 					<ChevronUpIcon className="h-6 w-6 bg-transparent sm:h-8 sm:w-8" />
 				</Link>
 			</div>
