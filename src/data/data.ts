@@ -11,5 +11,4 @@ export const SectionId = {
 	// Testimonials  : 'testimonios',
 } as const;
 
-// eslint-disable-next-line no-redeclare
-export type SectionId = typeof SectionId[keyof typeof SectionId];
+export type SectionIdType = typeof SectionId[keyof typeof SectionId];
