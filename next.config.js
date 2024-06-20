@@ -29,7 +29,6 @@ const nextConfig = {
   trailingSlash: false,
   images: {
     domains: ['images.unsplash.com', 'source.unsplash.com', 'photos.google.com','pbs.twimg.com', 'lh3.googleusercontent.com', 'decoraciondecasas.net', 'res.cloudinary.com', 'mural-uai.s3.us-east-1.amazonaws.com'],
-    // domains: ['images.unsplash.com', 'source.unsplash.com'],
   },
 };
 

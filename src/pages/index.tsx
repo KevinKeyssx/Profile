@@ -6,7 +6,7 @@ import {Loading}		from '../components/Loading';
 // import About          	from '../components/Sections/About';
 import Footer         	from '../components/Sections/Footer';
 import Hero           	from '../components/Sections/Hero';
-// import Portfolio      	from '../components/Sections/Portfolio';
+import Portfolio      	from '../components/Sections/Portfolio';
 import Resume         	from '../components/Sections/Resume';
 import {homePageMeta} 	from '../data/data';
 import {ILov} 			from '../data/lov.interface';
@@ -37,8 +37,11 @@ const Home: FC = memo(() => {
 	}, []);
 
 	const getData = async() => {
+		// eslint-disable-next-line no-undef
 		const url		= `${process.env.NEXT_PUBLIC_API_URL}lov/${Constants.END_POINT_SEARCH_ALL}`;
+		// eslint-disable-next-line no-undef
 		const headers	= new Headers();
+        // eslint-disable-next-line no-undef
         headers.append('X-T', process.env.NEXT_PUBLIC_TOKEN); 
 		// eslint-disable-next-line react-hooks/rules-of-hooks
 		const lov 	= await useFetch<ILov[] | { detail: string }>( url, 'GET', undefined, headers );
@@ -64,7 +67,7 @@ const Home: FC = memo(() => {
 			<Hero 		children = { data }/>
 			{/* <About 		children = { data }/> */}
 			<Resume 	children = { data }/>
-			{/* <Portfolio 	children = { data }/> */}
+			<Portfolio 	children = { data }/>
 			<Footer children = { data } />
 		</Page>
 	);

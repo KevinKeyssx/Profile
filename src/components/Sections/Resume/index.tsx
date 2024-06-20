@@ -55,6 +55,7 @@ const Resume: FC = memo((dataChildren) => {
 						<div className="space-x-2">
 							{getCertificates( children as ILov[] ).map( certificate => (
 								<span className="text-xs inline-block py-1 px-2.5 text-center whitespace-nowrap align-baseline font-bold bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-full">
+
 								<div className="flex items-center text-white">
 									<img
 										alt			= "cert"
@@ -62,7 +63,9 @@ const Resume: FC = memo((dataChildren) => {
 										src			= "cert.svg"
 										width		= '17'
 									/>
-									{certificate}
+									<span>
+										{certificate}
+									</span>
 								</div>
 							</span>))}
 						</div>
