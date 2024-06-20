@@ -17,7 +17,7 @@ const Hero: FC = memo((dataChildren) => {
 	const {profileImageSrc, aboutItems} = aboutData( children as ILov[] );
 
 	return (
-		<Section noPadding sectionId={SectionId.Hero}>
+		<Section noPadding>
 			<div className="relative flex h-screen w-screen items-center justify-center">
 				<Image
 					alt         = { `${name}-image` }

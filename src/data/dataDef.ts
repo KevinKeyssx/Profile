@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import {StaticImageData} from 'next/image';
 import {FC, SVGProps} from 'react';
 
@@ -90,6 +91,7 @@ export interface TimelineItem {
   date      : string;
   location  : string;
   title     : string;
+  // eslint-disable-next-line no-undef
   content   : JSX.Element;
   tools?    : string[];
 }
