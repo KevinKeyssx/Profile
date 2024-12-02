@@ -2,7 +2,7 @@
 import {useEffect} from 'react';
 
 import {headerID} from '../components/Sections/Header';
-import {SectionIdType} from '../data/data';
+import type {SectionIdType} from '../data/data';
 
 export const useNavObserver = (selectors: string, handler: (section: SectionIdType | null) => void) => {
   useEffect(() => {

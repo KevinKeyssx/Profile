@@ -21,6 +21,7 @@
     "next": "^13.1.5",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-resume-template": "file:",
     "ts-pattern": "^4.0.3"
   },
   "devDependencies": {
