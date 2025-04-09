@@ -6,7 +6,7 @@ import {Loading}		from '../components/Loading';
 // import About          	from '../components/Sections/About';
 import Footer         	from '../components/Sections/Footer';
 import Hero           	from '../components/Sections/Hero';
-import Portfolio      	from '../components/Sections/Portfolio';
+// import Portfolio      	from '../components/Sections/Portfolio';
 import Resume         	from '../components/Sections/Resume';
 import {ILov} 			from '../data/lov.interface';
 import {useFetch} 		from '../hooks/useFetch';
@@ -72,7 +72,7 @@ const Home: FC = memo(() => {
 			<Hero 		children = { data }/>
 			{/* <About 		children = { data }/> */}
 			<Resume 	children = { data }/>
-			<Portfolio 	children = { data }/>
+			{/* <Portfolio 	children = { data }/> */}
 			<Footer children = { data } />
 		</Page>
 	);

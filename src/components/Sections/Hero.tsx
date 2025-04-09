@@ -9,7 +9,7 @@ import {aboutData, heroData}    from '../../data/handleData';
 import {ILov}         			from '../../data/lov.interface';
 import Section        			from '../Layout/Section';
 import Socials        			from '../Socials';
-// import GeneratePdf 				from './Resume/GenerateCV';
+import CVDownloader             from './Resume/Buttons/CVDownloader';
 
 const Hero: FC = memo((dataChildren) => {
 	const {children} 					= dataChildren;
@@ -18,8 +18,9 @@ const Hero: FC = memo((dataChildren) => {
 
 	return (
 		<Section noPadding sectionId={SectionId.Hero}>
-			<div className="relative flex h-screen w-screen items-center justify-center">
+			<div className="relative flex h-screen w-auto items-center justify-center">
 				<Image
+                    id          = "heroBackgroundImage"
 					alt         = { `${name}-image` }
 					className   = "absolute z-0"
 					layout      = 'fill'
@@ -69,7 +70,7 @@ const Hero: FC = memo((dataChildren) => {
 									<Socials children={children as ILov[]} />
 								</div>
 
-								{/* <GeneratePdf /> */}
+                                <CVDownloader/>
 							</div>
 						</div>
 					</div>
