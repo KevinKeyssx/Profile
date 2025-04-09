@@ -22,8 +22,8 @@ const Hero: FC = memo((dataChildren) => {
 				<Image
 					alt         = { `${name}-image` }
 					className   = "absolute z-0"
+					id          = "heroBackgroundImage"
 					layout      = 'fill'
-                    id          = "heroBackgroundImage"
 					objectFit   = 'cover'
 					placeholder = "blur"
 					priority

@@ -1,4 +1,4 @@
-import React, {memo, useEffect, useState} from 'react';
+import React, {memo, useCallback, useEffect, useState} from 'react';
 
 import Loader from '../../Loaders/Loader';
 import styles from './Button.module.css';
@@ -11,7 +11,7 @@ interface ButtonProps {
 const CVDownloader: React.FC<ButtonProps> = memo(({onClick}) => {
     const [isLoading, setIsLoading] = useState(false);
 
-    const generatePDFServer = async () => {
+    const generatePDFServer = useCallback(async () => {
         setIsLoading(true);
         document.body.classList.add('generate-pdf');
 
@@ -42,7 +42,7 @@ const CVDownloader: React.FC<ButtonProps> = memo(({onClick}) => {
             setIsLoading(false);
             document.body.classList.remove('generate-pdf');
         }
-    };
+    }, []);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {

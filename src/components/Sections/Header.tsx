@@ -1,12 +1,11 @@
-import {FC, Fragment, memo, useCallback, useMemo, useState} from 'react';
-import Link 				from 'next/link';
-
-import classNames 			from 'classnames';
 import {Dialog, Transition} from '@headlessui/react';
-import {MenuAlt3Icon} 		from '@heroicons/react/outline';
+import {MenuAlt3Icon} from '@heroicons/react/outline';
+import classNames from 'classnames';
+import Link from 'next/link';
+import {FC, Fragment, memo, useCallback, useMemo, useState} from 'react';
 
-import {type SectionIdType,SectionId} 	from '../../data/data';
-import {useNavObserver}                 from '../../hooks/useNavObserver';
+import {type SectionIdType, SectionId} from '../../data/data';
+import {useNavObserver} from '../../hooks/useNavObserver';
 
 export const headerID = 'headerNav';
 
