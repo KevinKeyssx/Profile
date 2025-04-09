@@ -4,7 +4,7 @@
 export const SectionId = {
 	Hero          : 'kevin',
 	About         : 'kevin',
-	// Portfolio     : 'portafolio',
+	Portfolio     : 'portafolio',
 	Resume        : 'resumen',
 	Skills        : 'habilidades',
 	Stats         : 'estadísticas',
