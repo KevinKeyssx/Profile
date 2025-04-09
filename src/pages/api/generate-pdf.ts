@@ -4,7 +4,7 @@ export default async (req, res) => {
     try {
         const browser   = await puppeteer.launch();
         const page      = await browser.newPage();
-        const pageUrl   = `http://localhost:${process.env.PORT || 3000}${req.query.path || '/'}`;
+        const pageUrl   = `${process.env.NEXT_PUBLIC_URL_PROD}${req.query.path || '/'}`;
 
         await page.goto(pageUrl, {
             waitUntil: 'networkidle0',
