@@ -20,10 +20,10 @@ const Hero: FC = memo((dataChildren) => {
 		<Section noPadding sectionId={SectionId.Hero}>
 			<div className="relative flex h-screen w-auto items-center justify-center">
 				<Image
-                    id          = "heroBackgroundImage"
 					alt         = { `${name}-image` }
 					className   = "absolute z-0"
 					layout      = 'fill'
+                    id          = "heroBackgroundImage"
 					objectFit   = 'cover'
 					placeholder = "blur"
 					priority

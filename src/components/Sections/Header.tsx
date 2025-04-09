@@ -1,21 +1,22 @@
+import {FC, Fragment, memo, useCallback, useMemo, useState} from 'react';
+import Link 				from 'next/link';
+
+import classNames 			from 'classnames';
 import {Dialog, Transition} from '@headlessui/react';
 import {MenuAlt3Icon} 		from '@heroicons/react/outline';
-import classNames 			from 'classnames';
-import Link 				from 'next/link';
-import {FC, Fragment, memo, useCallback, useMemo, useState} from 'react';
 
-import {type SectionIdType,SectionId} 		from '../../data/data';
-import {useNavObserver} from '../../hooks/useNavObserver';
+import {type SectionIdType,SectionId} 	from '../../data/data';
+import {useNavObserver}                 from '../../hooks/useNavObserver';
 
 export const headerID = 'headerNav';
 
 const Header: FC = memo(() => {
 	const [currentSection, setCurrentSection] = useState<SectionIdType | null>(null);
 	const navSections = useMemo(
-		// () => [SectionId.About, SectionId.Resume, SectionId.Portfolio, SectionId.Testimonials],
-		() => [SectionId.About, SectionId.Resume, SectionId.Portfolio],
-		// () => [SectionId.About, SectionId.Resume],
-		[],
+		() => [
+            SectionId.About,
+            SectionId.Resume,
+        ], [],
 	);
 
 	const intersectionHandler = useCallback((section: SectionIdType | null) => {

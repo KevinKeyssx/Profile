@@ -46,9 +46,9 @@ export default async (req, res) => {
                     }
                 });
                 
-                return { success: true, message: 'Attempted to change image' };
+                return {success: true, message: 'Attempted to change image'};
             } catch (error) {
-                return { success: false, error: String(error) };
+                return {success: false, error: String(error)};
             }
         });
 
@@ -69,6 +69,6 @@ export default async (req, res) => {
         res.setHeader('Content-Disposition', 'attachment; filename="pagina.pdf"');
         res.end(pdfBuffer);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to generate PDF' });
+        res.status(500).json({error: 'Failed to generate PDF'});
     }
 };
