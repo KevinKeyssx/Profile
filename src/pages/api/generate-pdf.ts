@@ -59,7 +59,6 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
             `
         });
 
-        
         await page.evaluate(() => {
             const header = document.querySelector('#headerNav');
             if ( header ) header.remove();
