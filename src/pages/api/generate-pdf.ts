@@ -19,8 +19,13 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
         const page      = await browser.newPage();
         const pageUrl   = `${process.env.NEXT_PUBLIC_URL_PROD}${req.query.path || '/'}`;
 
+        await page.setDefaultNavigationTimeout(120000);
+        await page.setDefaultTimeout(120000);
+
         await page.goto(pageUrl, {
-            waitUntil: 'networkidle0',
+            // waitUntil: 'networkidle0',
+            waitUntil: 'domcontentloaded',
+            timeout: 120000
         });
 
         await page.addStyleTag({
@@ -74,6 +79,8 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
         const pdfBuffer = await page.pdf({
             format          : 'A3',
             printBackground : true,
+            timeout         : 120000,
+            scale           : 0.8
         });
 
         // await browser.close();
