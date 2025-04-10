@@ -1,8 +1,21 @@
-import puppeteer from 'puppeteer';
+// import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
+import chromium from '@sparticuz/chromium';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async (req, res) => {
+export default async ( req: NextApiRequest, res: NextApiResponse ) => {
+    let browser;
+
     try {
-        const browser   = await puppeteer.launch();
+        const config = {
+            args: [...chromium.args, '--hide-scrollbars', '--disable-web-security'],
+            defaultViewport: chromium.defaultViewport,
+            executablePath: await chromium.executablePath(),
+            headless: true,
+            ignoreHTTPSErrors: true,
+        }
+
+        browser   = await puppeteer.launch(config);
         const page      = await browser.newPage();
         const pageUrl   = `${process.env.NEXT_PUBLIC_URL_PROD}${req.query.path || '/'}`;
 
@@ -63,12 +76,14 @@ export default async (req, res) => {
             printBackground : true,
         });
 
-        await browser.close();
+        // await browser.close();
 
         res.setHeader('Content-Type', 'application/pdf');
         res.setHeader('Content-Disposition', 'attachment; filename="pagina.pdf"');
         res.end(pdfBuffer);
     } catch (error) {
         res.status(500).json({error: 'Failed to generate PDF'});
+    }finally {
+        if (browser) await browser.close();
     }
 };

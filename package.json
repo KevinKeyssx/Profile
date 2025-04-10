@@ -14,10 +14,12 @@
   "dependencies": {
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
+    "@sparticuz/chromium": "^133.0.0",
     "autoprefixer": "^10.4.2",
     "classnames": "^2.3.1",
     "next": "^13.1.5",
     "puppeteer": "^24.6.0",
+    "puppeteer-core": "^24.6.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-resume-template": "file:",
