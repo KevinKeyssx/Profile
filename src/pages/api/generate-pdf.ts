@@ -82,8 +82,6 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
             printBackground : true,
         });
 
-        // await browser.close();
-
         res.setHeader('Content-Type', 'application/pdf');
         res.setHeader('Content-Disposition', 'attachment; filename="pagina.pdf"');
         res.end(pdfBuffer);
