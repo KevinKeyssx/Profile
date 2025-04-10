@@ -23,9 +23,9 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
         await page.setDefaultTimeout(60000);
 
         await page.goto(pageUrl, {
-            // waitUntil: 'networkidle0',
+            waitUntil: 'networkidle0',
             // waitUntil: 'domcontentloaded',
-            waitUntil: 'load',
+            // waitUntil: 'load',
             timeout: 120000
         });
 
