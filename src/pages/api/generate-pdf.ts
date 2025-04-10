@@ -8,35 +8,34 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
 
     try {
         const config = {
-            args: [...chromium.args, '--hide-scrollbars', '--disable-web-security'],
-            defaultViewport: chromium.defaultViewport,
-            executablePath: await chromium.executablePath(),
-            headless: true,
-            ignoreHTTPSErrors: true,
+            args                : [...chromium.args, '--hide-scrollbars', '--disable-web-security'],
+            defaultViewport     : chromium.defaultViewport,
+            executablePath      : await chromium.executablePath(),
+            headless            : true,
+            ignoreHTTPSErrors   : true,
         }
 
-        browser   = await puppeteer.launch(config);
-        const page      = await browser.newPage();
-        const pageUrl   = `${process.env.NEXT_PUBLIC_URL_PROD}${req.query.path || '/'}`;
-        const bgImageUrl = `${process.env.NEXT_PUBLIC_URL_PROD}/bg.jpg`;
+        browser = await puppeteer.launch( config );
+
+        const page          = await browser.newPage();
+        const pageUrl       = `${process.env.NEXT_PUBLIC_URL_PROD}${req.query.path || '/'}`;
+        const bgImageUrl    = `${process.env.NEXT_PUBLIC_URL_PROD}/bg.jpg`;
 
         await page.setDefaultNavigationTimeout(90000);
         await page.setDefaultTimeout(60000);
 
         // Interceptar solicitudes para manejar imágenes
         await page.setRequestInterception(true);
-        
+
         page.on('request', request => {
             request.continue();
         });
-        
-        // Esperar a que la página cargue completamente
+
         await page.goto(pageUrl, {
             waitUntil: 'networkidle0',
             timeout: 120000
         });
-        
-        // Esperar un tiempo adicional para asegurar que las imágenes se carguen
+
         await page.waitForTimeout(2000);
 
         // await page.addStyleTag({
@@ -70,7 +69,7 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
 
         // Obtener las URLs absolutas para las imágenes
         const profileImageUrl = `${process.env.NEXT_PUBLIC_URL_PROD}/profile.jpg`;
-        
+
         // Evaluar en el contexto de la página para manipular el DOM
         const result = await page.evaluate((bgImageUrl, profileImageUrl) => {
             // Eliminar elementos no deseados
@@ -117,9 +116,8 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
                 return {success: false, error: String(error)};
             }
         }, bgImageUrl, profileImageUrl);
-        
-        console.log('DOM manipulation result:', result);
 
+        console.log('DOM manipulation result:', result);
 
         // Establecer un viewport adecuado para el PDF
         await page.setViewport({
@@ -127,7 +125,7 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
             height: 1080,
             deviceScaleFactor: 2,
         });
-        
+
         // Esperar a que las imágenes se carguen completamente
         await page.waitForFunction(() => {
             const images = Array.from(document.querySelectorAll('img'));
@@ -140,7 +138,7 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
 
         // Capturar una screenshot para verificar que las imágenes se ven correctamente
         await page.screenshot({ path: '/tmp/preview.png' });
-        
+
         // Generar el PDF con todas las opciones necesarias
         const pdfBuffer = await page.pdf({
             format: 'A3',
