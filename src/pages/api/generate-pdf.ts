@@ -18,6 +18,7 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
         browser   = await puppeteer.launch(config);
         const page      = await browser.newPage();
         const pageUrl   = `${process.env.NEXT_PUBLIC_URL_PROD}${req.query.path || '/'}`;
+        const bgImageUrl = `${process.env.NEXT_PUBLIC_URL_PROD}/bg.jpg`;
 
         await page.setDefaultNavigationTimeout(90000);
         await page.setDefaultTimeout(60000);
@@ -29,20 +30,35 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
             timeout: 120000
         });
 
+        // await page.addStyleTag({
+        //     content: `
+        //         #heroBackgroundImage {
+        //             background-image: url('/bg.jpg') !important;
+        //             object-fit: cover !important;
+        //         }
+
+        //         img.absolute.z-0[alt$="-image"]:not([alt="me-image"]) {
+        //             content: url('/bg.jpg') !important;
+        //             visibility: visible !important;
+        //             opacity: 1 !important;
+        //         }
+        //     `
+        // });
+
         await page.addStyleTag({
             content: `
                 #heroBackgroundImage {
-                    background-image: url('/bg.jpg') !important;
+                    background-image: url('${bgImageUrl}') !important;
                     object-fit: cover !important;
                 }
-
                 img.absolute.z-0[alt$="-image"]:not([alt="me-image"]) {
-                    content: url('/bg.jpg') !important;
+                    content: url('${bgImageUrl}') !important;
                     visibility: visible !important;
                     opacity: 1 !important;
                 }
             `
         });
+
         
         await page.evaluate(() => {
             const header = document.querySelector('#headerNav');
@@ -54,14 +70,14 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
             try {
                 const heroSection = document.querySelector(`[id^="hero"]`);
 
-                if ( heroSection ) ( heroSection as HTMLElement ).style.backgroundImage = 'url("/bg.jpg")';
+                if ( heroSection ) ( heroSection as HTMLElement ).style.backgroundImage = `url("${bgImageUrl}")`;
 
                 const nextImages = document.querySelectorAll('img');
 
                 nextImages.forEach(img => {
                     if (img.alt && img.alt.includes('-image') && !img.alt.includes('me-image') && 
                         (img.className.includes('absolute') || img.id === 'heroBackgroundImage')) {
-                        img.src = '/bg.jpg';
+                        img.src = bgImageUrl;
                     }
                 });
                 
@@ -70,6 +86,7 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
                 return {success: false, error: String(error)};
             }
         });
+
 
         // await page.setViewport({
         //     width: 1920,
