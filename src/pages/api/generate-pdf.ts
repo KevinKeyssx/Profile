@@ -1,7 +1,7 @@
 // import puppeteer from 'puppeteer';
-import puppeteer from 'puppeteer-core';
+import {NextApiRequest, NextApiResponse} from 'next';
 import chromium from '@sparticuz/chromium';
-import { NextApiRequest, NextApiResponse } from 'next';
+import puppeteer from 'puppeteer-core';
 
 export default async ( req: NextApiRequest, res: NextApiResponse ) => {
     let browser;
