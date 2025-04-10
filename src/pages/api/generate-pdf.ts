@@ -134,10 +134,10 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
                 if (img.naturalWidth === 0) return false;
                 return true;
             });
-        }, { timeout: 10000 });
+        }, {timeout: 10000});
 
         // Capturar una screenshot para verificar que las imágenes se ven correctamente
-        await page.screenshot({ path: '/tmp/preview.png' });
+        await page.screenshot({path: '/tmp/preview.png'});
 
         // Generar el PDF con todas las opciones necesarias
         const pdfBuffer = await page.pdf({
