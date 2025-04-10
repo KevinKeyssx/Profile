@@ -71,11 +71,11 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
             }
         });
 
-        await page.setViewport({
-            width: 1920,
-            height: 1080,
-            deviceScaleFactor: 5,
-        });
+        // await page.setViewport({
+        //     width: 1920,
+        //     height: 1080,
+        //     deviceScaleFactor: 5,
+        // });
 
         const pdfBuffer = await page.pdf({
             format          : 'A3',
