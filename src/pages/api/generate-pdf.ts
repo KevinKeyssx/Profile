@@ -1,7 +1,7 @@
-import chromium from '@sparticuz/chromium';
 import {NextApiRequest, NextApiResponse} from 'next';
-import puppeteer from 'puppeteer-core';
 import {Redis} from '@upstash/redis';
+import chromium from '@sparticuz/chromium';
+import puppeteer from 'puppeteer-core';
 
 // export default async ( req: NextApiRequest, res: NextApiResponse ) => {
 //     let browser;
@@ -298,7 +298,7 @@ export default async ( req: NextApiRequest, res: NextApiResponse ): Promise<any>
         console.log('Generando nuevo PDF');
         const pdfBuffer = await generatePDF(req);
 
-        redis.set(cacheKey, pdfBuffer.toString('base64'), { ex: CACHE_TTL })
+        redis.set(cacheKey, pdfBuffer.toString('base64'), {ex: CACHE_TTL})
             .catch(e => console.error('Cache save error:', e));
 
         // 4. Responder
