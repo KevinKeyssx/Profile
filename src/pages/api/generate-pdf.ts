@@ -23,7 +23,7 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
         // || (req.headers.origin || 'https://www.kevinkeyssx.dev');
         const pageUrl = `${baseUrl}${req.query.path || '/'}`;
         const bgImageUrl = `${baseUrl}/bg.jpg`;
-        const profileImageUrl = `${baseUrl}/profile.jpg`;
+        const profileImageUrl = `${baseUrl}/me.jpg`;
         
         console.log('Using URLs:', {baseUrl, pageUrl, bgImageUrl, profileImageUrl});
 
