@@ -68,7 +68,7 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
             console.warn('Failed to add style tag:', styleError);
         }
 
-        await new Promise(resolve => setTimeout( resolve, 3000 ));
+        await new Promise(resolve => setTimeout( resolve, 1000 ));
 
         await page.evaluate((bgImageUrl, profileImageUrl) => {
             const header = document.querySelector( '#headerNav' );
@@ -116,7 +116,7 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
                     if (img.naturalWidth === 0) return false;
                     return true;
                 });
-            }, {timeout: 5000});
+            }, {timeout: 1000});
         } catch (timeoutError) {
             console.warn('Image loading timeout, continuing anyway:', timeoutError);
         }
@@ -124,12 +124,6 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
         const pdfBuffer = await page.pdf({
             format: 'A3',
             printBackground: true,
-            // margin: {
-            //     top: '20px',
-            //     right: '20px',
-            //     bottom: '20px',
-            //     left: '20px'
-            // },
             preferCSSPageSize: true
         });
 
