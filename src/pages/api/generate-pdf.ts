@@ -25,7 +25,7 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
         const bgImageUrl = `${baseUrl}/bg.jpg`;
         const profileImageUrl = `${baseUrl}/profile.jpg`;
         
-        console.log('Using URLs:', { baseUrl, pageUrl, bgImageUrl, profileImageUrl });
+        console.log('Using URLs:', {baseUrl, pageUrl, bgImageUrl, profileImageUrl});
 
         await page.setDefaultNavigationTimeout(90000);
         await page.setDefaultTimeout(60000);
