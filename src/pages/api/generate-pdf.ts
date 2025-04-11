@@ -68,7 +68,7 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
             console.warn('Failed to add style tag:', styleError);
         }
 
-        await new Promise(resolve => setTimeout( resolve, 1000 ));
+        await new Promise(resolve => setTimeout( resolve, 3000 ));
 
         await page.evaluate((bgImageUrl, profileImageUrl) => {
             const header = document.querySelector( '#headerNav' );
