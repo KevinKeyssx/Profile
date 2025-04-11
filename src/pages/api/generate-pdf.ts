@@ -116,7 +116,7 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
                     if (img.naturalWidth === 0) return false;
                     return true;
                 });
-            }, {timeout: 1000});
+            }, {timeout: 3000});
         } catch (timeoutError) {
             console.warn('Image loading timeout, continuing anyway:', timeoutError);
         }
