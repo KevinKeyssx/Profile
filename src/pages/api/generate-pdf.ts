@@ -1,6 +1,6 @@
-import {NextApiRequest, NextApiResponse} from 'next';
-import {Redis} from '@upstash/redis';
 import chromium from '@sparticuz/chromium';
+import {Redis} from '@upstash/redis';
+import {NextApiRequest, NextApiResponse} from 'next';
 import puppeteer from 'puppeteer-core';
 
 // export default async ( req: NextApiRequest, res: NextApiResponse ) => {
