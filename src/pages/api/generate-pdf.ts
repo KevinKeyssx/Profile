@@ -17,24 +17,19 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
 
         browser = await puppeteer.launch( config );
 
-        const page          = await browser.newPage();
-        // Ensure we have the base URL, with fallback to the request origin
-        const baseUrl = process.env.NEXT_PUBLIC_URL_PROD
-        // || (req.headers.origin || 'https://www.kevinkeyssx.dev');
-        const pageUrl = `${baseUrl}${req.query.path || '/'}`;
-        const bgImageUrl = `${baseUrl}/bg.jpg`;
-        const profileImageUrl = `${baseUrl}/me.jpg`;
-        
-        console.log('Using URLs:', {baseUrl, pageUrl, bgImageUrl, profileImageUrl});
+        const page              = await browser.newPage();
+        const baseUrl           = process.env.NEXT_PUBLIC_URL_PROD;
+        const pageUrl           = `${baseUrl}${req.query.path || '/'}`;
+        const bgImageUrl        = `${baseUrl}/bg.jpg`;
+        const profileImageUrl   = `${baseUrl}/me.jpg`;
 
-        await page.setDefaultNavigationTimeout(90000);
-        await page.setDefaultTimeout(60000);
+        await page.setDefaultNavigationTimeout( 90000 );
+        await page.setDefaultTimeout( 60000 );
 
         // Interceptar solicitudes para manejar imágenes
-        await page.setRequestInterception(true);
+        await page.setRequestInterception( true );
 
         page.on('request', request => {
-            // Ensure all resources load properly
             try {
                 request.continue();
             } catch (e) {
@@ -44,26 +39,10 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
         });
 
         await page.goto(pageUrl, {
-            waitUntil: 'networkidle0',
-            timeout: 120000
+            waitUntil   : 'networkidle0',
+            timeout     : 120000
         });
 
-        // await page.addStyleTag({
-        //     content: `
-        //         #heroBackgroundImage {
-        //             background-image: url('/bg.jpg') !important;
-        //             object-fit: cover !important;
-        //         }
-
-        //         img.absolute.z-0[alt$="-image"]:not([alt="me-image"]) {
-        //             content: url('/bg.jpg') !important;
-        //             visibility: visible !important;
-        //             opacity: 1 !important;
-        //         }
-        //     `
-        // });
-
-        // Agregar estilos directamente a la página
         try {
             await page.addStyleTag({
                 content: `
@@ -89,24 +68,20 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
             console.warn('Failed to add style tag:', styleError);
         }
 
-        // Ya hemos definido profileImageUrl arriba
+        // await new Promise(resolve => setTimeout( resolve, 3000 ));
 
-        // Esperar un poco más para asegurar que la página esté completamente cargada
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        
-        // Evaluar en el contexto de la página para manipular el DOM
-        const result = await page.evaluate((bgImageUrl, profileImageUrl) => {
-            // Eliminar elementos no deseados
-            const header = document.querySelector('#headerNav');
-            if (header) header.remove();
+        await page.evaluate((bgImageUrl, profileImageUrl) => {
+            const header = document.querySelector( '#headerNav' );
 
-            const generatePdfButton = document.querySelector('#generatePdfButton');
-            if (generatePdfButton) generatePdfButton.remove();
+            if ( header ) header.remove();
+
+            const generatePdfButton = document.querySelector( '#generatePdfButton' );
+
+            if ( generatePdfButton ) generatePdfButton.remove();
 
             try {
-                // Método más simple para manejar las imágenes
-                // Insertar estilos directamente en el head
-                const styleEl = document.createElement('style');
+                const styleEl = document.createElement( 'style' );
+
                 styleEl.textContent = `
                     [id^="hero"] {
                         background-image: url("${bgImageUrl}") !important;
@@ -124,24 +99,21 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
                         display: block !important;
                     }
                 `;
-                document.head.appendChild(styleEl);
-                
+
+                document.head.appendChild( styleEl );
+
                 return {success: true, message: 'Style injection successful'};
             } catch (error) {
                 return {success: false, error: String(error)};
             }
         }, bgImageUrl, profileImageUrl);
 
-        console.log('DOM manipulation result:', result);
+        // await page.setViewport({
+        //     width: 1920,
+        //     height: 1080,
+        //     deviceScaleFactor: 2,
+        // });
 
-        // Establecer un viewport adecuado para el PDF
-        await page.setViewport({
-            width: 1920,
-            height: 1080,
-            deviceScaleFactor: 2,
-        });
-
-        // Esperar a que las imágenes se carguen completamente
         try {
             await page.waitForFunction(() => {
                 const images = Array.from(document.querySelectorAll('img'));
@@ -153,18 +125,10 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
             }, {timeout: 5000});
         } catch (timeoutError) {
             console.warn('Image loading timeout, continuing anyway:', timeoutError);
-            // Continue even if images don't fully load
         }
 
-        // Capturar una screenshot para verificar que las imágenes se ven correctamente
-        // Skip screenshot capture as it might be causing issues
-        // The /tmp directory might not be accessible in all environments
+        // await new Promise(resolve => setTimeout(resolve, 2000));
 
-        // Esperar un poco más para asegurar que las imágenes estén cargadas
-        // Use setTimeout instead of waitForTimeout which might not be available in all Puppeteer versions
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        
-        // Generar el PDF con todas las opciones necesarias
         const pdfBuffer = await page.pdf({
             format: 'A3',
             printBackground: true,
