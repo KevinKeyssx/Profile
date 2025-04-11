@@ -48,8 +48,6 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
             timeout: 120000
         });
 
-        await page.waitForTimeout(2000);
-
         // await page.addStyleTag({
         //     content: `
         //         #heroBackgroundImage {
@@ -94,7 +92,7 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
         // Ya hemos definido profileImageUrl arriba
 
         // Esperar un poco más para asegurar que la página esté completamente cargada
-        await page.waitForTimeout(3000);
+        await new Promise(resolve => setTimeout(resolve, 3000));
         
         // Evaluar en el contexto de la página para manipular el DOM
         const result = await page.evaluate((bgImageUrl, profileImageUrl) => {
@@ -163,7 +161,8 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
         // The /tmp directory might not be accessible in all environments
 
         // Esperar un poco más para asegurar que las imágenes estén cargadas
-        await page.waitForTimeout(2000);
+        // Use setTimeout instead of waitForTimeout which might not be available in all Puppeteer versions
+        await new Promise(resolve => setTimeout(resolve, 2000));
         
         // Generar el PDF con todas las opciones necesarias
         const pdfBuffer = await page.pdf({
