@@ -8,39 +8,57 @@ interface ButtonProps {
     onClick?: () => void;
 }
 
+const MONTHS = [
+    'Enero',
+    'Febrero',
+    'Marzo',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiembre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre'
+];
+
 const CVDownloader: React.FC<ButtonProps> = memo(({onClick}) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const generatePDFServer = useCallback(async () => {
-        setIsLoading(true);
-        document.body.classList.add('generate-pdf');
+        setIsLoading( true );
+        document.body.classList.add( 'generate-pdf' );
 
         try {
-            const response = await fetch('/api/generate-pdf?path=/');
+            const response = await fetch( '/api/generate-pdf?path=/' );
 
-            if (!response.ok) {
-                console.error('Error al generar el PDF:', response.status);
+            if ( !response.ok ) {
+                console.error( 'Error al generar el PDF:', response.status );
                 return;
             }
 
-            const blob = await response.blob();
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
+            const blob  = await response.blob();
+            const url   = window.URL.createObjectURL(blob);
+            const a     = document.createElement('a');
+            const date  = new Date();
+            const year  = date.getFullYear();
+            const month = date.getMonth() + 1;
 
-            a.href = url;
-            a.download = `KevinCandiaCV-${new Date().getFullYear()}.pdf`;
+            a.href      = url;
+            a.download  = `Kevin_Candia_CV_${MONTHS[month - 1]}_${year}.pdf`;
 
-            document.body.appendChild(a);
+            document.body.appendChild( a );
 
             a.click();
 
-            window.URL.revokeObjectURL(url);
-            document.body.removeChild(a);
-        } catch (error) {
-            console.error('Error al generar el PDF:', error);
+            window.URL.revokeObjectURL( url );
+            document.body.removeChild( a );
+        } catch ( error ) {
+            console.error( 'Error al generar el PDF:', error );
         } finally {
-            setIsLoading(false);
-            document.body.classList.remove('generate-pdf');
+            setIsLoading( false );
+            document.body.classList.remove( 'generate-pdf' );
         }
     }, []);
 
