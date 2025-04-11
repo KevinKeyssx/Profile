@@ -23,8 +23,8 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
         const bgImageUrl        = `${baseUrl}/bg.jpg`;
         const profileImageUrl   = `${baseUrl}/me.jpg`;
 
-        await page.setDefaultNavigationTimeout( 90000 );
-        await page.setDefaultTimeout( 60000 );
+        // await page.setDefaultNavigationTimeout( 90000 );
+        // await page.setDefaultTimeout( 60000 );
 
         // Interceptar solicitudes para manejar imágenes
         await page.setRequestInterception( true );
@@ -108,12 +108,6 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
             }
         }, bgImageUrl, profileImageUrl);
 
-        // await page.setViewport({
-        //     width: 1920,
-        //     height: 1080,
-        //     deviceScaleFactor: 2,
-        // });
-
         try {
             await page.waitForFunction(() => {
                 const images = Array.from(document.querySelectorAll('img'));
@@ -127,17 +121,15 @@ export default async ( req: NextApiRequest, res: NextApiResponse ) => {
             console.warn('Image loading timeout, continuing anyway:', timeoutError);
         }
 
-        // await new Promise(resolve => setTimeout(resolve, 2000));
-
         const pdfBuffer = await page.pdf({
             format: 'A3',
             printBackground: true,
-            margin: {
-                top: '20px',
-                right: '20px',
-                bottom: '20px',
-                left: '20px'
-            },
+            // margin: {
+            //     top: '20px',
+            //     right: '20px',
+            //     bottom: '20px',
+            //     left: '20px'
+            // },
             preferCSSPageSize: true
         });
 
