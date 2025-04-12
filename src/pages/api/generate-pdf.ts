@@ -1,8 +1,10 @@
 import chromium from '@sparticuz/chromium';
-import {Redis} from '@upstash/redis';
+import {put, head} from '@vercel/blob';
 import {NextApiRequest, NextApiResponse} from 'next';
 import puppeteer from 'puppeteer-core';
 
+
+// import {Redis} from '@upstash/redis';
 // export default async ( req: NextApiRequest, res: NextApiResponse ) => {
 //     let browser;
 
@@ -268,45 +270,85 @@ async function generatePDF (req: NextApiRequest): Promise<Buffer> {
 }
 
 
-const redis = new Redis({
-    url     : process.env.NEXT_PUBLIC_PDF_URL!,
-    token   : process.env.NEXT_PUBLIC_PDF_PASSWORD!,
-});
+// const redis = new Redis({
+//     url     : process.env.NEXT_PUBLIC_PDF_URL!,
+//     token   : process.env.NEXT_PUBLIC_PDF_PASSWORD!,
+// });
 
 
-const CACHE_TTL = 2592000;
+// const CACHE_TTL = 2592000;
 
 
-export default async ( req: NextApiRequest, res: NextApiResponse ): Promise<any> => {
-    const cacheKey = `pdf:pdfBuffer:v1`;
+// export default async ( req: NextApiRequest, res: NextApiResponse ): Promise<any> => {
+//     const cacheKey = `pdf:pdfBuffer:v1`;
+
+//     try {
+//         const cachedPdf = await redis.get( cacheKey )
+//             .catch(e => {
+//                 console.error('Cache read error:', e);
+//                 return null;
+//             });
+
+//         if ( cachedPdf ) {
+//             console.log('Sirviendo desde caché');
+//             res.setHeader('Content-Type', 'application/pdf');
+//             res.setHeader('X-Cache', 'HIT');
+//             return res.end(Buffer.from(cachedPdf as string, 'base64'));
+//         }
+
+//         // 2. Generar nuevo PDF si no hay caché
+//         console.log('Generando nuevo PDF');
+//         const pdfBuffer = await generatePDF(req);
+
+//         redis.set(cacheKey, pdfBuffer.toString('base64'), {ex: CACHE_TTL})
+//             .catch(e => console.error('Cache save error:', e));
+
+//         // 4. Responder
+//         res.setHeader('Content-Type', 'application/pdf');
+//         res.setHeader('X-Cache', 'MISS');
+//         res.end(pdfBuffer);
+//     } catch (error) {
+//         console.error('Error:', error);
+//         res.status(500).json({error: 'Failed to generate PDF'});
+//     }
+// };
+
+
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+    const blobKey = `pdf-${req.query.path || 'home'}-v1.pdf`;
 
     try {
-        const cachedPdf = await redis.get( cacheKey )
-            .catch(e => {
-                console.error('Cache read error:', e);
-                return null;
-            });
+        // 1. Verificar si el blob existe usando el cliente oficial
+        try {
+            const {url: existingUrl} = await head( blobKey );
+            console.log( 'Sirviendo desde Vercel Blob Storage' );
+            res.setHeader( 'X-Cache', 'HIT' );
 
-        if ( cachedPdf ) {
-            console.log('Sirviendo desde caché');
-            res.setHeader('Content-Type', 'application/pdf');
-            res.setHeader('X-Cache', 'HIT');
-            return res.end(Buffer.from(cachedPdf as string, 'base64'));
+            // Redirigir al blob almacenado
+            return res.redirect( 307, existingUrl );
+        } catch (error) {
+            // El blob no existe, continuamos con la generación
         }
 
-        // 2. Generar nuevo PDF si no hay caché
+        // 2. Generar nuevo PDF
         console.log('Generando nuevo PDF');
         const pdfBuffer = await generatePDF(req);
 
-        redis.set(cacheKey, pdfBuffer.toString('base64'), {ex: CACHE_TTL})
-            .catch(e => console.error('Cache save error:', e));
+        // 3. Subir a Vercel Blob Storage (sin token manual)
+        const {url} = await put( blobKey, pdfBuffer, {
+            access: 'public',
+            contentType: 'application/pdf'
+        });
 
-        // 4. Responder
-        res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('X-Cache', 'MISS');
-        res.end(pdfBuffer);
+        console.log('PDF almacenado en:', url);
+        res.redirect(307, url);
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).json({error: 'Failed to generate PDF'});
+        return res.status(500).json({ 
+            error: 'Failed to generate PDF',
+            ...(process.env.NODE_ENV === 'development' && {
+                details: error instanceof Error ? error.message : String(error)
+            })
+        });
     }
 };
