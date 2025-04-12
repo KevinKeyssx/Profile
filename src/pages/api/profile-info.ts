@@ -1,5 +1,6 @@
-import {Constants} from '../../utils/constants';
 import type {NextApiRequest, NextApiResponse} from 'next';
+
+import {Constants} from '../../utils/constants';
 
 type ResponseData = any;
 

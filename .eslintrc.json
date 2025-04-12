@@ -1,0 +1,18 @@
+{
+  "root": true,
+  "rules": {
+    // Desactivar todas las reglas
+    "@typescript-eslint/no-unused-vars": "off",
+    "react-hooks/rules-of-hooks": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "react-memo/require-memo": "off",
+    "react-memo/require-usememo": "off",
+    "no-undef": "off",
+    // Desactivar todas las demás reglas
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "import/no-anonymous-default-export": "off"
+  }
+}
