@@ -151,7 +151,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
         const {url} = await put( blobKey, pdfBuffer, {
             access: 'public',
-            contentType: 'application/pdf'
+            contentType: 'application/pdf',
+            cacheControlMaxAge: 2592000
         });
 
         console.log('PDF almacenado en:', url);

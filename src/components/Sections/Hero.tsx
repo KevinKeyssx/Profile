@@ -53,8 +53,8 @@ const Hero: FC = memo((dataChildren) => {
 								</div>
 							)}
 
-							<div className="flex flex-col gap-y-3 sm:gap-y-5 md:w-3/4">
-								<ul className="grid grid-cols-1 gap-3 md:gap-4 sm:grid-cols-2">
+							<div className="flex flex-col gap-y-4 sm:gap-y-5 md:w-3/4">
+								<ul className="grid grid-cols-1 gap-2 md:gap-4 sm:grid-cols-2">
                                     {aboutItems.map(({label, text, Icon}, idx) => (
                                         <li className="col-span-1 flex items-start gap-x-2" key={idx}>
                                             {Icon && <Icon className="h-5 w-5 text-white" />}
@@ -70,7 +70,7 @@ const Hero: FC = memo((dataChildren) => {
 									<Socials children={children as ILov[]} />
 								</div>
 
-                                <div className='mx-auto mb-10 md:mb-0'>
+                                <div className='mx-auto mb-6 md:mb-0'>
                                     <CVDownloader/>
                                 </div>
 							</div>

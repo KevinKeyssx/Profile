@@ -9,8 +9,6 @@ import Hero           	from '../components/Sections/Hero';
 // import Portfolio      	from '../components/Sections/Portfolio';
 import Resume         	from '../components/Sections/Resume';
 import {ILov} 			from '../data/lov.interface';
-import {useFetch} 		from '../hooks/useFetch';
-import {Constants} 		from '../utils/constants';
 // import Testimonials   from '../components/Sections/Testimonials';
 // eslint-disable-next-line react-memo/require-memo
 const Header = dynamic(() => import('../components/Sections/Header'), {ssr: false});
@@ -41,20 +39,18 @@ const Home: FC = memo(() => {
 	}, []);
 
 	const getData = async() => {
-		// eslint-disable-next-line no-undef
-		const url		= `${process.env.NEXT_PUBLIC_API_URL}lov/${Constants.END_POINT_SEARCH_ALL}`;
-		// eslint-disable-next-line no-undef
-		const headers	= new Headers();
-        // eslint-disable-next-line no-undef
-        headers.append('X-T', process.env.NEXT_PUBLIC_TOKEN); 
-		// eslint-disable-next-line react-hooks/rules-of-hooks
-		const lov 	= await useFetch<ILov[] | { detail: string }>( url, 'GET', undefined, headers );
-		const fail 	= lov as { detail: string };
+		try {
+			const response  = await fetch( '/api/profile-info' );
+			const lov       = await response.json();
+			const fail      = lov as { detail: string };
 
-		if (  fail.detail )	return;
+            if ( fail.detail ) return;
 
-		setData( lov as ILov[] );
-		setLoaded( true );
+			setData(lov as ILov[]);
+			setLoaded(true);
+		} catch (error) {
+			console.error('Error fetching profile data:', error);
+		}
 	}
 
 	if ( !loaded ) {
