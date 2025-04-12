@@ -1,12 +1,12 @@
 import dynamic    from 'next/dynamic';
 import {FC, memo, useState, useEffect} from 'react';
 
-import Page     		from '../components/Layout/Page';
-import {Loading}		from '../components/Loading';
-import Footer         	from '../components/Sections/Footer';
-import Hero           	from '../components/Sections/Hero';
-import Resume         	from '../components/Sections/Resume';
-import {ILov} 			from '../data/lov.interface';
+import Page         from '../components/Layout/Page';
+import {Loading}    from '../components/Loading';
+import Footer       from '../components/Sections/Footer';
+import Hero         from '../components/Sections/Hero';
+import Resume       from '../components/Sections/Resume';
+import {ILov}       from '../data/lov.interface';
 // import Portfolio     from '../components/Sections/Portfolio';
 // import About         from '../components/Sections/About';
 // import Testimonials  from '../components/Sections/Testimonials';
