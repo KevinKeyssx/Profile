@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { Constants } from '../../utils/constants';
+import {Constants} from '../../utils/constants';
+import type {NextApiRequest, NextApiResponse} from 'next';
 
 type ResponseData = any;
 
@@ -32,6 +32,6 @@ export default async function handler(
         res.status(200).json(data);
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).json({ detail: 'Error fetching data' });
+        res.status(500).json({detail: 'Error fetching data'});
     }
 }
