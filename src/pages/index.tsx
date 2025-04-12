@@ -20,32 +20,42 @@ const Home: FC = memo(() => {
 	};
 
 	const {title, description}  = homePageMeta;
+    const profileKey            = 'profile-data';
+    const dateKey               = 'profile-date';
 
-    const [profileData, setProfileData] = useState<ILov[] | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const [profileData, setProfileData] = useState<ILov[] | null>( null );
+    const [isLoading, setIsLoading]     = useState( true );
 
     useEffect(() => {
         const loadData = async () => {
             try {
                 if ( typeof window !== 'undefined' ) {
-                    const cachedData = localStorage.getItem('profile-data');
+                    const cachedData    = localStorage.getItem( profileKey );
+                    const cachedMonth   = localStorage.getItem( dateKey );
+                    const date          = new Date();
 
-                    if ( cachedData ) {
-                        setProfileData(JSON.parse(cachedData));
-                        setIsLoading(false);
-                        return;
+                    if ( cachedData && cachedMonth ) {
+                        if ( date.getMonth().toString() !== cachedMonth && date.getDate() === 1 ) {
+                            localStorage.removeItem( profileKey );
+                            localStorage.removeItem( dateKey );
+                        } else {
+                            setProfileData( JSON.parse( cachedData ));
+                            setIsLoading( false );
+                            return;
+                        }
                     }
 
                     const response  = await fetch( '/api/profile-info' );
                     const data      = await response.json();
 
-                    localStorage.setItem( 'profile-data', JSON.stringify( data ));
+                    localStorage.setItem( profileKey, JSON.stringify( data ));
+                    localStorage.setItem( dateKey, new Date().getMonth().toString() );
 
                     setProfileData( data );
                     setIsLoading( false );
                 }
             } catch (e) {
-                console.error('Error al leer localStorage:', e);
+                console.error( 'Error al leer localStorage:', e );
             }
         };
 
