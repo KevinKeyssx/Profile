@@ -1,5 +1,5 @@
-import {head, put} from '@vercel/blob';
 import chromium from '@sparticuz/chromium';
+import {head, put} from '@vercel/blob';
 import {NextApiRequest, NextApiResponse} from 'next';
 import puppeteer from 'puppeteer-core';
 
