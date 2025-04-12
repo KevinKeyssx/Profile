@@ -30,9 +30,9 @@ const Hero: FC = memo((dataChildren) => {
 					src         = { imageSrc }
 				/>
 
-				<div className="z-10  max-w-screen-lg px-4 lg:px-0">
-					<div className="flex flex-col items-center gap-y-6 rounded-xl bg-gray-800/40 p-10 pb-px  shadow-lg backdrop-blur-sm">
-						<h1 className="text-4xl font-bold text-amber-600 sm:text-4xl lg:text-5xl">
+				<div className="z-10 max-w-screen-lg px-2 md:px-4 lg:px-0">
+					<div className="flex flex-col items-center gap-y-3 md:gap-y-5 rounded-xl bg-gray-800/40 py-5 md:py-8 px-8 pb-px shadow-lg backdrop-blur-sm">
+						<h1 className="text-3xl font-bold text-amber-600 sm:text-4xl lg:text-5xl">
 							{name}
 						</h1>
 
@@ -53,30 +53,32 @@ const Hero: FC = memo((dataChildren) => {
 								</div>
 							)}
 
-							<div className="flex flex-col gap-y-6 md:w-3/4">
-								<ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-								{aboutItems.map(({label, text, Icon}, idx) => (
-									<li className="col-span-1 flex items-start gap-x-2" key={idx}>
-										{Icon && <Icon className="h-5 w-5 text-white" />}
+							<div className="flex flex-col gap-y-3 sm:gap-y-5 md:w-3/4">
+								<ul className="grid grid-cols-1 gap-3 md:gap-4 sm:grid-cols-2">
+                                    {aboutItems.map(({label, text, Icon}, idx) => (
+                                        <li className="col-span-1 flex items-start gap-x-2" key={idx}>
+                                            {Icon && <Icon className="h-5 w-5 text-white" />}
 
-										<span className="text-sm font-bold text-white">{label}:</span>
+                                            <span className="text-sm font-bold text-white">{label}:</span>
 
-										<span className="text-sm text-gray-300">{text}</span>
-									</li>
-								))}
+                                            <span className="text-sm text-gray-300">{text}</span>
+                                        </li>
+                                    ))}
 								</ul>
 
 								<div className="flex justify-center gap-x-4 text-neutral-100">
 									<Socials children={children as ILov[]} />
 								</div>
 
-                                <CVDownloader/>
+                                <div className='mx-auto mb-10 md:mb-0'>
+                                    <CVDownloader/>
+                                </div>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<div className="absolute inset-x-0 bottom-6 flex justify-center">
+				<div className="z-20  absolute inset-x-0 bottom-6 flex justify-center">
 					<Link
 						className="rounded-full bg-white p-1 ring-white ring-offset-2 ring-offset-gray-700/80 focus:outline-none focus:ring-2 sm:p-2"
 						href={`/#${SectionId.Resume}`}>

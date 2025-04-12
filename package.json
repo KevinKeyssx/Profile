@@ -15,7 +15,6 @@
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "@sparticuz/chromium": "^133.0.0",
-    "@upstash/redis": "^1.34.7",
     "@vercel/blob": "^1.0.0",
     "autoprefixer": "^10.4.2",
     "classnames": "^2.3.1",
