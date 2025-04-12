@@ -41,20 +41,31 @@ const Hero: FC = memo((dataChildren) => {
 						<div className="flex flex-col md:flex-row items-center md:items-start justify-center gap-4">
 							{!!profileImageSrc && (
 								<div className="flex justify-center md:justify-start">
-									<div className="relative h-34 w-34 overflow-hidden md:h-60 md:w-52">
-										<Image
-											alt			= "me-image"
-											className	= "rounded-xl"
-											height		= "200"
-											src			= {profileImageSrc}
-											width		= "150"
-										/>
+									<div className="relative">
+										<div className="relative overflow-hidden rounded-xl ring-1 ring-gray-900/5 animate-fadeIn">
+											<style jsx>{`
+												@keyframes fadeIn {
+													0% { opacity: 0; transform: scale(0.95); }
+													100% { opacity: 1; transform: scale(1); }
+												}
+												.animate-fadeIn {
+													animation: fadeIn 0.4s ease-out forwards;
+												}
+											`}</style>
+											<Image
+												alt			= "me-image"
+												className	= "rounded-xl shadow-lg"
+												height		= "150"
+												src			= {profileImageSrc}
+												width		= "150"
+											/>
+										</div>
 									</div>
 								</div>
 							)}
 
 							<div className="flex flex-col gap-y-4 sm:gap-y-5 md:w-3/4">
-								<ul className="grid grid-cols-1 gap-2 md:gap-4 sm:grid-cols-2">
+								<ul className="grid grid-cols-1 gap-3 md:gap-4 sm:grid-cols-2">
                                     {aboutItems.map(({label, text, Icon}, idx) => (
                                         <li className="col-span-1 flex items-start gap-x-2" key={idx}>
                                             {Icon && <Icon className="h-5 w-5 text-white" />}
@@ -70,7 +81,7 @@ const Hero: FC = memo((dataChildren) => {
 									<Socials children={children as ILov[]} />
 								</div>
 
-                                <div className='mx-auto mb-6 md:mb-0'>
+                                <div className='mx-auto mb-5 md:mb-0'>
                                     <CVDownloader/>
                                 </div>
 							</div>

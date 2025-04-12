@@ -16,7 +16,6 @@
     "@heroicons/react": "^1.0.6",
     "@sparticuz/chromium": "^133.0.0",
     "@vercel/blob": "^1.0.0",
-    "@vercel/kv": "^3.0.0",
     "autoprefixer": "^10.4.2",
     "classnames": "^2.3.1",
     "next": "^13.1.5",

@@ -1,18 +1,17 @@
 import dynamic    from 'next/dynamic';
-import {FC, memo, useEffect, useState} from 'react';
+import {FC, memo, useState, useEffect} from 'react';
 
 import Page     		from '../components/Layout/Page';
 import {Loading}		from '../components/Loading';
-// import About          	from '../components/Sections/About';
 import Footer         	from '../components/Sections/Footer';
 import Hero           	from '../components/Sections/Hero';
-// import Portfolio      	from '../components/Sections/Portfolio';
 import Resume         	from '../components/Sections/Resume';
 import {ILov} 			from '../data/lov.interface';
-// import Testimonials   from '../components/Sections/Testimonials';
-// eslint-disable-next-line react-memo/require-memo
-const Header = dynamic(() => import('../components/Sections/Header'), {ssr: false});
+// import Portfolio     from '../components/Sections/Portfolio';
+// import About         from '../components/Sections/About';
+// import Testimonials  from '../components/Sections/Testimonials';
 
+const Header = dynamic(() => import('../components/Sections/Header'), {ssr: false});
 
 const Home: FC = memo(() => {
 	const homePageMeta = {
@@ -22,38 +21,38 @@ const Home: FC = memo(() => {
 
 	const {title, description}  = homePageMeta;
 
-	const [ loaded, setLoaded ] = useState( false );
+    const [profileData, setProfileData] = useState<ILov[] | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
-	const [data, setData] = useState( [{
-		id         		: "",
-		description		: "",
-		lov_vals   		: [],
-		active     		: true,
-		comment    		: "",
-		created_at 		: new Date(),
-		skill      		: {},
-	}] as ILov[] );
+    useEffect(() => {
+        const loadData = async () => {
+            try {
+                if ( typeof window !== 'undefined' ) {
+                    const cachedData = localStorage.getItem('profile-data');
 
-	useEffect(() => {
-		getData();
-	}, []);
+                    if ( cachedData ) {
+                        setProfileData(JSON.parse(cachedData));
+                        setIsLoading(false);
+                        return;
+                    }
 
-	const getData = async() => {
-		try {
-			const response  = await fetch( '/api/profile-info' );
-			const lov       = await response.json();
-			const fail      = lov as { detail: string };
+                    const response  = await fetch( '/api/profile-info' );
+                    const data      = await response.json();
 
-            if ( fail.detail ) return;
+                    localStorage.setItem( 'profile-data', JSON.stringify( data ));
 
-			setData(lov as ILov[]);
-			setLoaded(true);
-		} catch (error) {
-			console.error('Error fetching profile data:', error);
-		}
-	}
+                    setProfileData( data );
+                    setIsLoading( false );
+                }
+            } catch (e) {
+                console.error('Error al leer localStorage:', e);
+            }
+        };
 
-	if ( !loaded ) {
+        loadData();
+    }, []);
+
+	if ( isLoading ) {
 		return (
 			<Page description={description} title={title}>
 				<Loading/>
@@ -62,15 +61,14 @@ const Home: FC = memo(() => {
 	}
 
 	return (
-		// eslint-disable-next-line react-memo/require-usememo
-		<Page description={description} title={title}>
-			<Header />
-			<Hero 		children = { data }/>
-			{/* <About 		children = { data }/> */}
-			<Resume 	children = { data }/>
-			{/* <Portfolio 	children = { data }/> */}
-			<Footer children = { data } />
-		</Page>
+        <Page description={description} title={title}>
+            <Header />
+            <Hero 		children = { profileData }/>
+            {/* <About 		children = { profileData }/> */}
+            <Resume 	children = { profileData }/>
+            {/* <Portfolio 	children = { profileData }/> */}
+            <Footer children = { profileData } />
+        </Page>
 	);
 });
 
